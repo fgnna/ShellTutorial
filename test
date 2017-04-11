@@ -1,9 +1,16 @@
 #!/bin/bash
+set -e     # 如果不开启这里，某一行命令执行出错，程序仍会继续执行下一个命令, 按需设置
+set -u # 默认情况下未声明变量为空字符串，这样很容易出问题，添加此设置后，引用未声明变量会报错
+set -x # 将会使得 bash 在实际运行命令之前打印出每个待执行的命令。这对调试真的很有用。 
+set -o # 选项查看所有其他的 bash 选项。
+##我所见到的人们在实践中所使用的大量 shell 脚本都以 set -eu 或者 set -eux 打头。一切为了安全性！
+##如果 pipe 的部分失败了，你也可以使用 set -o pipefail 来退出。
+
 message="Hello Shell,j\' haha" #单引号会忽略任何特殊字符，双引号保留特殊操作符  
 echo "the message = $message"
 echo $message
 
-dosomething=`pwd` #反引号代表执行命令
+dosomething=`pwd` #反引号代表执行命令 或 使用 $(pwd)
 echo "the dosomething = $dosomething"\
 
 ## -p 输入提示说明
