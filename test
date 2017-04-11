@@ -46,21 +46,141 @@ echo "本次执行脚本输入了$#个参数，脚本名参数为：$0 ; 其他�
 echo $1
 shift 
 echo $1
-shift 
-echo $1
-shift 
-echo $1
-shift 
 
 ## 数组 array 初始化方式与其他语言有点不用 元素间用[空格]分开而不是用[逗号,]
-array=("n1" "n2" "n3")
+array=("n2" "n2" "n3")
 array[5]="n5"
 ## ${array[*]}  *号表示所有 注使数组使用时要加{}
 echo "数组${array[*]}"
-echo "数组[0]=${array[1]}"
+echo "数组[1]=${array[1]}"
+
+##条件语句 if [ 条件，两侧必须带空格 ]
+if [ ${array[0]} = "n1" ]
+then 
+	echo ' if $array[0] = "n1" is true'
+else
+	echo ' if $array[0] = "n1" is false'
+fi
+
+if [ ${array[0]} = "n1" ];then 
+	echo ' if $array[0] = "n1" is true'
+elif [ ${array[1]} = "n2" ];then
+	echo ' elif $array[1] = "n2" is true'
+fi
+echo "条件测试----------------"
+if [ ${array[0]} != "n1" ];then 
+	echo '$array[0] != "n1"'
+fi
+## -z $string zero首字母 代表空判断
+if [ -z ${array[4]} ];then
+	echo ' -z ${array[4]} '
+fi
+## -n $string notnull
+if [ -n ${array[3]} ];then
+	echo ' -n ${array[4]} '
+fi
+
+## 数字条件测试
+num1=1
+num2=1
+num3=3
+
+if [ $num1 -eq $num2 ];then
+	echo ' num1 =(-eq) num2 '
+fi
+
+if [ $num1 -ne $num3 ];then
+	echo ' num1 !=(-ne) num2 '
+fi
+
+if [ $num1 -lt $num3 ];then
+	echo ' num1 <(-lt) num3 '
+fi
+
+if [ $num1 -le $num2 ];then
+	echo ' num1 <=(-lt) num2 '
+fi
+if [ $num3 -gt $num2 ];then
+	echo ' num3 >(-ge) num2 '
+fi
+
+if [ $num1 -ge $num2 ];then
+	echo ' num1 >=(-gt) num2 '
+fi
 
 
+## 文件测试
+## -e $file
+## 非  ！ 
+file1="~/work/hahah"
+if [ ! -e file1 ];then
+	echo ' 文件不存在 '
+fi
+## -d $file 是否为一个目录/文件夹
+## -f 是否为一个文件
+## -L 文件是否是一个符号链接文件。L 是 link 的首字母，表示「链接」
+## -r $file	文件是否可读。r 是 readable 的首字母，表示「可读的」。
+## -w $file	文件是否可写。w 是 writable 的首字母，表示「可写的」。
+## -x $file	文件是否可执行。x 是 executable 的首字母，表示「可执行的」。
+## $file1 -nt $file2 文件 file1 是否比 file2 更新。nt 是 newer than 的缩写，表示「更新的」。
+## $file1 -ot $file2 文件 file1 是否比 file2 更旧。ot 是 older than 的缩写，表示「更旧的」。
 
+## 多条件 && || 
+if [ ! -e $file1 ] || [ ! -d $file1 ];then
+	echo ' 没有该文件或目录 '
+fi
+
+## 多条件 case
+case $1 in
+    "Matthew")
+        echo "Hello Matthew !"
+        ;;
+    "Mark")
+        echo "Hello Mark !"
+        ;;
+    *)
+        echo "Sorry, I do not know you."
+        ;;
+esac
+
+##########################
+##循环 
+##########################
+
+while [ ! -z $1 ]
+do
+	echo " 参数：$1"
+	shift
+done
+## until 与 while相反，直到条件为 true 时才退出
+#until [ "$response" = 'yes' ]
+#do
+#    read -p 'Say yes : ' response
+#done
+
+for animal in 'dog' 'cat' 'pig'
+do
+    echo "Animal being analyzed : $animal" 
+done
+
+for i in ${array[*]}
+do
+    echo " array : $i" 
+done
+
+for files in `ls`
+do
+    echo " ls file : $files" 
+done
+
+for i in `seq 1 10`
+do
+    echo "循环10次：第$i次"
+done
+for i in `seq 1 2 10`
+do
+    echo "循环到1到10，间隔为2：第$i次"
+done
 
 
 
