@@ -1,0 +1,84 @@
+#!/bin/bash
+message="Hello Shell,j\' haha" #单引号会忽略任何特殊字符，双引号保留特殊操作符  
+echo "the message = $message"
+echo $message
+
+dosomething=`pwd` #反引号代表执行命令
+echo "the dosomething = $dosomething"\
+
+## -p 输入提示说明
+## -n 最大输入的长度，输入长度超出会自动结束输入 
+#read -p "请输入任何字符,不能超过5个：" -n 5 anything
+#echo "  输入了：$anything"
+
+#read -p "请输入两个单词，用空格分开：" word1 word2
+#echo "第一个单词为：$word1"
+#echo "第二个单词为: $word2"
+
+## -t 限制输入时间
+## -s 隐藏输入(secret)，如：密码输入
+#read -p "5秒内输入字符:" -t 5 lasttime
+## -e 输出时支持c语法的转义字符 如:\n
+#echo -e "\n5秒内输入了: $lasttime"
+
+## 算术运算使用let命令 但只支持整数，浮点运算用bc命令 
+## 可执行操作符：+-*/% **(幂,乘方)
+## 
+let " a = 5 "
+let " b = 6 "
+let " c = a + b "
+let " d = a ** 3 "
+echo "$a + $b = $c"
+echo "$a 的3次方 $d"
+
+## 环境变量命令 env
+#env
+echo $CLASSPATH
+#新增一个环境变量 export
+export TEST_PXPOET=hahahahah
+echo $TEST_PXPOET
+
+#############################
+## 脚本参数 $#（参数数量）  $0(第一个参数第脚本自身的名字) $1 $........
+## shift 移参 使得参数一个一个地往前移 
+#############################
+echo "本次执行脚本输入了$#个参数，脚本名参数为：$0 ; 其他参数分别为：$1,$2,$3,$4"
+echo $1
+shift 
+echo $1
+shift 
+echo $1
+shift 
+echo $1
+shift 
+
+## 数组 array 初始化方式与其他语言有点不用 元素间用[空格]分开而不是用[逗号,]
+array=("n1" "n2" "n3")
+array[5]="n5"
+## ${array[*]}  *号表示所有 注使数组使用时要加{}
+echo "数组${array[*]}"
+echo "数组[0]=${array[1]}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
