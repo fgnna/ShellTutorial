@@ -1,0 +1,26 @@
+#!/bin/bash
+test_function()
+{
+    echo "hello function()"
+    echo "参数1＝$1"
+    echo "参数2＝$2"
+    return 1
+}
+
+test_return()
+{
+    local array=("33" "44")
+    echo ${array[0]}
+    echo ${array[1]}
+}
+#局部变量声明
+test_global()
+{
+    local var1='local 1'
+}
+
+test_function w e
+# $? 为上一次调用的函数的返回值
+echo test_funcion is return $?
+array_return=$(test_return)
+echo function is $array_return
