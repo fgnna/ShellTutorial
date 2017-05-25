@@ -24,3 +24,12 @@ test_function w e
 echo test_funcion is return $?
 array_return=$(test_return)
 echo function is $array_return
+
+#命令载 如重载ls 命令 注意关键字command
+ls()
+{
+    command ls -a
+}
+ls
+
+
